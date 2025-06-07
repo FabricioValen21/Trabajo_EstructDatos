@@ -2,6 +2,7 @@
 using namespace std;
 
 int main() {
-    cout << "Simulador de GestiÃ³n de Procesos" << endl;
+    cout << "Bienvenido al sistema de gestión de procesos" << endl;
     return 0;
 }
+
