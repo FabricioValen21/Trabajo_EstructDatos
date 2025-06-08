@@ -28,6 +28,15 @@ struct ProcesoBloqueado {
 
 // ==== FIN DE ESTRUCTURAS DEL SISTEMA ====
 
+// ==== VARIABLES GLOBALES COMPARTIDAS ====
+// NO ELIMINAR NI CAMBIAR NOMBRES NI TIPOS
+
+extern Proceso* listaListos;
+extern Proceso* colaCPU;
+extern BloqueMemoria* pilaMemoria;
+extern ProcesoBloqueado* colaBloqueados;
+
+// ==== FIN DE VARIABLES ====
 
 // CASO:
 // Algunos procesos se bloquean esperando algo (como E/S).
