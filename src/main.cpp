@@ -28,6 +28,16 @@ struct ProcesoBloqueado {
 
 // ==== FIN DE ESTRUCTURAS DEL SISTEMA ====
 
+// ==== VARIABLES GLOBALES ====
+// NO ELIMINAR NI CAMBIAR NOMBRES
+
+Proceso* listaListos = nullptr;             // Lista de procesos en estado "Listo"
+Proceso* colaCPU = nullptr;                 // Cola de prioridad de CPU
+BloqueMemoria* pilaMemoria = nullptr;       // Pila de memoria asignada
+ProcesoBloqueado* colaBloqueados = nullptr; // Cola de procesos bloqueados
+
+// ==== FIN DE VARIABLES GLOBALES ====
+
 
 // Prototipos de funciones (declaración externa)
 void crearProceso();
