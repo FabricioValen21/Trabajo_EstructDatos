@@ -43,5 +43,43 @@ extern ProcesoBloqueado* colaBloqueados;
 // Este archivo se encarga de agregar esos procesos a una lista de espera (estado "Listo").
 
 void crearProceso() {
-    // Aquí va tu código para pedir datos y agregarlos a la lista enlazada.
+    // Se crea un nuevo nodo de tipo Proceso dinamicamente
+    
+    Proceso* nuevo = new Proceso();
+    
+    // Pedimos al usuario el ID del proceso:
+    cout << "Ingrese el ID del proceso: ";
+    cin >> nuevo->id;
+    
+    // Pedimos el nombre del proceso
+    cout << "Ingrese el nombre del proceso: ";
+    cin.ignore(); // Limpia el buffer por si quedo un salto de linea anterior
+	cin.getline(nuevo->nombre, 30); 
+	
+	//Algo
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
