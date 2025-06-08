@@ -4,7 +4,7 @@ Aquí se registrarán las actas del trabajo grupal para evidenciar acuerdos, reu
 
 ---
 
-## 📝 Acta 1 - 07 de junio de 2025, 13:58 h
+## 📝 Acta 2 - 07 de junio de 2025, 13:58 h
 
 **Participantes:** Integrantes del grupo del curso de Estructura de Datos  
 **Ubicación:** Coordinación virtual vía WhatsApp, GitHub y Gmail (Chat y Meet)   
