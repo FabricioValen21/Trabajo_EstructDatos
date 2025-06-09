@@ -6,5 +6,4 @@ using namespace std;
 // Este archivo desencola un proceso, reduce su duración y decide si terminó o vuelve a la cola.
 
 void ejecutarProceso() {
-    // Desencolar, duración--, si llega a 0 liberar memoria, si no, reencolar.
 }
