@@ -43,5 +43,12 @@ extern ProcesoBloqueado* colaBloqueados;
 // Este archivo quita el bloque m√°s reciente de la pila (pop).
 
 void liberarMemoria() {
-    // Quitar el nodo de la cima de la pila (si existe).
+    if (pilaMemoria == NULL){
+        cout << "No hay bloques para liberar" << endl;  } 
+	else {
+        BloqueMemoria* temp = pilaMemoria;
+        pilaMemoria = pilaMemoria->siguiente;
+        delete temp;
+        cout << "Bloque de memoria liberado correctamente." <<†endl;
+††††}
 }
