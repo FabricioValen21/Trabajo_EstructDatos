@@ -31,10 +31,10 @@ struct ProcesoBloqueado {
 // ==== VARIABLES GLOBALES ====
 // NO ELIMINAR NI CAMBIAR NOMBRES
 
-Proceso* listaListos = nullptr;             // Lista de procesos en estado "Listo"
-Proceso* colaCPU = nullptr;                 // Cola de prioridad de CPU
-BloqueMemoria* pilaMemoria = nullptr;       // Pila de memoria asignada
-ProcesoBloqueado* colaBloqueados = nullptr; // Cola de procesos bloqueados
+Proceso* listaListos = NULL;             // Lista de procesos en estado "Listo"
+Proceso* colaCPU = NULL;                 // Cola de prioridad de CPU
+BloqueMemoria* pilaMemoria = NULL;       // Pila de memoria asignada
+ProcesoBloqueado* colaBloqueados = NULL; // Cola de procesos bloqueados
 
 // ==== FIN DE VARIABLES GLOBALES ====
 
