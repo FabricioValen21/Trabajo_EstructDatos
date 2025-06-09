@@ -29,6 +29,7 @@ Proceso* listaListos = nullptr;             // Lista de procesos en estado "List
 Proceso* colaCPU = nullptr;                 // Cola de prioridad de CPU
 BloqueMemoria* pilaMemoria = nullptr;       // Pila de memoria asignada
 ProcesoBloqueado* colaBloqueados = nullptr; // Cola de procesos bloqueados
+// MEJORA: Agregado control de memoria total del sistema
 int memoriaTotal = 1000;                    // Memoria total del sistema
 int memoriaUsada = 0;                       // Memoria actualmente en uso
 
@@ -50,6 +51,7 @@ bool existeProceso(int id);
 bool validarEntradaPositiva(int valor);
 
 // ==== FUNCIONES AUXILIARES ====
+// MEJORA: Agregada función para verificar existencia de procesos en todas las estructuras
 bool existeProceso(int id) {
     // Buscar en lista de listos
     Proceso* temp = listaListos;
@@ -75,10 +77,12 @@ bool existeProceso(int id) {
     return false;
 }
 
+// MEJORA: Agregada validación de números positivos
 bool validarEntradaPositiva(int valor) {
     return valor > 0;
 }
 
+// MEJORA: Nueva función para mostrar estado completo de memoria
 void mostrarEstadoMemoria() {
     cout << "\n========== ESTADO DE MEMORIA ==========\n";
     cout << "Memoria total: " << memoriaTotal << " MB\n";
@@ -108,13 +112,14 @@ void crearProceso() {
     cout << "Ingrese el ID del proceso: ";
     cin >> nuevo->id;
     
-    // Validaciones mejoradas
+    // CORRECCIÓN: Validaciones mejoradas para IDs positivos únicos
     if (!validarEntradaPositiva(nuevo->id)) {
         cout << "Error: El ID debe ser un número positivo.\n";
         delete nuevo;
         return;
     }
     
+    // CORRECCIÓN: Verificación de IDs únicos en todas las estructuras
     if (existeProceso(nuevo->id)) {
         cout << "Error: Ya existe un proceso con ID " << nuevo->id << endl;
         delete nuevo;
@@ -141,7 +146,7 @@ void crearProceso() {
         cin >> nuevo->duracion;
     }
     
-    // Insertar al final de la lista (FIFO dentro de la misma prioridad)
+    // CORRECCIÓN: Inserción al final de la lista (FIFO) en lugar de al inicio
     nuevo->siguiente = nullptr;
     if (listaListos == nullptr) {
         listaListos = nuevo;
@@ -200,6 +205,7 @@ void verProcesosListo() {
 }
 
 void cambiarEstado() {
+    // CORRECCIÓN: Agregado soporte para múltiples tipos de cambio de estado
     if (listaListos == nullptr && colaBloqueados == nullptr) {
         cout << "No hay procesos disponibles para cambiar de estado.\n";
         return;
@@ -237,7 +243,7 @@ void cambiarEstado() {
             anterior->siguiente = actual->siguiente;
         }
         
-        // Insertar en cola de CPU ordenado por prioridad
+        // CORRECCIÓN: Inserción ordenada por prioridad en cola de CPU
         actual->siguiente = nullptr;
         if (colaCPU == nullptr || actual->prioridad > colaCPU->prioridad) {
             actual->siguiente = colaCPU;
@@ -267,7 +273,7 @@ void ejecutarProceso() {
         return;
     }
     
-    // El proceso con mayor prioridad está al frente (ya ordenado)
+    // CORRECCIÓN: Simplificado - el proceso con mayor prioridad ya está al frente
     Proceso* procesoEjecutar = colaCPU;
     colaCPU = colaCPU->siguiente;
     
@@ -280,10 +286,11 @@ void ejecutarProceso() {
     
     if (procesoEjecutar->duracion <= 0) {
         cout << "Proceso " << procesoEjecutar->nombre << " ha terminado.\n";
+        // CORRECCIÓN: Llamada a función específica para liberar memoria del proceso
         liberarMemoriaDeProcesoEspecifico(procesoEjecutar->id);
         delete procesoEjecutar;
     } else {
-        // Reencolar en cola de CPU manteniendo orden de prioridad
+        // CORRECCIÓN: Reencolar manteniendo orden de prioridad
         procesoEjecutar->siguiente = nullptr;
         if (colaCPU == nullptr || procesoEjecutar->prioridad > colaCPU->prioridad) {
             procesoEjecutar->siguiente = colaCPU;
@@ -305,6 +312,7 @@ void asignarMemoria() {
     cout << "Ingrese el ID del proceso: ";
     cin >> idProceso;
     
+    // CORRECCIÓN: Verificación de existencia del proceso antes de asignar memoria
     if (!existeProceso(idProceso)) {
         cout << "Error: No existe un proceso con ID " << idProceso << endl;
         return;
@@ -313,11 +321,13 @@ void asignarMemoria() {
     cout << "Ingrese el tamaño de memoria a asignar (MB): ";
     cin >> tamanio;
     
+    // CORRECCIÓN: Validación de tamaños positivos
     if (!validarEntradaPositiva(tamanio)) {
         cout << "Error: El tamaño debe ser positivo.\n";
         return;
     }
     
+    // CORRECCIÓN: Control de límites de memoria del sistema
     if (memoriaUsada + tamanio > memoriaTotal) {
         cout << "Error: Memoria insuficiente. Disponible: " 
              << (memoriaTotal - memoriaUsada) << " MB\n";
@@ -329,6 +339,7 @@ void asignarMemoria() {
     nuevoBloque->tamanio = tamanio;
     nuevoBloque->siguiente = pilaMemoria;
     pilaMemoria = nuevoBloque;
+    // CORRECCIÓN: Actualización del contador de memoria usada
     memoriaUsada += tamanio;
     
     cout << "Memoria asignada: " << tamanio << " MB para el proceso " 
@@ -344,6 +355,7 @@ void liberarMemoria() {
     
     BloqueMemoria* bloqueALiberar = pilaMemoria;
     pilaMemoria = pilaMemoria->siguiente;
+    // CORRECCIÓN: Actualización del contador de memoria usada al liberar
     memoriaUsada -= bloqueALiberar->tamanio;
     
     cout << "Liberando " << bloqueALiberar->tamanio 
@@ -352,11 +364,13 @@ void liberarMemoria() {
     delete bloqueALiberar;
 }
 
+// CORRECCIÓN: Nueva función específica para liberar memoria de un proceso
 void liberarMemoriaDeProcesoEspecifico(int idProceso) {
     BloqueMemoria* anterior = nullptr;
     BloqueMemoria* actual = pilaMemoria;
     bool encontrado = false;
     
+    // CORRECCIÓN: Búsqueda y liberación de todos los bloques del proceso
     while (actual != nullptr) {
         if (actual->idProceso == idProceso) {
             encontrado = true;
@@ -366,6 +380,7 @@ void liberarMemoriaDeProcesoEspecifico(int idProceso) {
                 anterior->siguiente = actual->siguiente;
             }
             
+            // CORRECCIÓN: Actualización correcta del contador de memoria
             memoriaUsada -= actual->tamanio;
             cout << "Liberando " << actual->tamanio 
                  << " MB del proceso " << idProceso << endl;
@@ -457,7 +472,7 @@ void bloquearProceso() {
     
     nuevoBloqueado->siguiente = nullptr;
     
-    // Agregar al final de la cola de bloqueados (FIFO)
+    // CORRECCIÓN: Agregado inserción al final (FIFO) para cola de bloqueados
     if (colaBloqueados == nullptr) {
         colaBloqueados = nuevoBloqueado;
     } else {
@@ -479,6 +494,7 @@ void bloquearProceso() {
     cout << "Proceso bloqueado exitosamente.\n";
 }
 
+// MEJORA: Nueva función para desbloquear procesos manualmente
 void desbloquearProceso() {
     if (colaBloqueados == nullptr) {
         cout << "No hay procesos bloqueados.\n";
@@ -546,6 +562,7 @@ void desbloquearProceso() {
     cout << "Proceso desbloqueado y movido a la lista de 'Listos'.\n";
 }
 
+// MEJORA: Nueva función para terminar procesos manualmente
 void terminarProceso() {
     int idProceso;
     cout << "Ingrese el ID del proceso a terminar: ";
@@ -598,6 +615,7 @@ void terminarProceso() {
     cout << "Proceso no encontrado.\n";
 }
 
+// CORRECCIÓN: Función crítica para prevenir memory leaks al salir
 void limpiarMemoriaAlSalir() {
     // Liberar memoria de procesos listos
     while (listaListos != nullptr) {
@@ -672,6 +690,7 @@ int main() {
             case 11: mostrarEstadoMemoria(); break;
             case 12: 
                 cout << "Saliendo del sistema...\n";
+                // CORRECCIÓN: Llamada obligatoria para evitar memory leaks
                 limpiarMemoriaAlSalir();
                 break;
             default: 
