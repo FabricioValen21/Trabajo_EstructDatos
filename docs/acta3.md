@@ -1,1 +1,6 @@
 
+El dia domingo 8 de junio del 2025 a las 6:58 p.m., los integrantes del grupo conformado por Luis Mario Huillca Quispe, Gary Jhoel Choquehuanca Yupanqui, Fabricio Alans Valencia Hañari, Juan Carlos Cuti Muñoz y Nicolas Anderson Champi Palacios nos reunimos de manera virtual para continuar con el desarrollo del proyecto de Estructura de Datos. La coordinación previa para la reunión se realizó mediante mensajes de WhatsApp, donde se acordó con algunas horas de anticipación llevar a cabo la sesión por Google Meet.
+
+Durante esta cuarta reunión, iniciamos revisando el avance obtenido el día sábado, verificando el funcionamiento de los códigos implementados y realizando algunas pruebas adicionales para asegurar su correcto desempeño. Posteriormente, cada integrante continuó con la parte del código que le correspondía, ajustando detalles, mejorando la lógica interna de las estructuras y asegurando que todas las funcionalidades respondieran según lo esperado. La sesión se desarrolló de manera organizada y colaborativa, permitiendo avanzar de forma significativa en la consolidación del sistema.
+
+La reunión finalizó tras haber logrado avances importantes en la implementación del proyecto, quedando como pendiente realizar una última revisión general y preparar la entrega formal del trabajo.
