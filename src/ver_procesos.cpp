@@ -45,7 +45,7 @@ extern ProcesoBloqueado* colaBloqueados;
 
 void verProcesosListo() {
     // Verificar si la lista está vacía
-    if (listaListos == nullptr) {
+    if (listaListos == NULL) {
         cout << "\nNo hay procesos en estado 'Listo'.\n";
         return;
     }
@@ -60,7 +60,7 @@ void verProcesosListo() {
     int totalProcesos = 0;
     
     // Recorrer la lista enlazada de procesos
-    while (temp != nullptr) {
+    while (temp != NULL) {
         // Mostrar ID del proceso
         cout << temp->id << "\t";
         
