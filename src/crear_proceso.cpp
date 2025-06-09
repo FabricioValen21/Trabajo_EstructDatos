@@ -65,10 +65,10 @@ void crearProceso() {
     cin >> nuevo->duracion;
     
     // Inicializa el puntero siguiente como NULL, porque todavía no se enlaza
-    nuevo->siguiente = nullptr;
+    nuevo->siguiente = NULL;
     
     // Inserta el nuevo proceso al final de la lista "listaListos"
-    if (listaListos == nullptr) {
+    if (listaListos == NULL) {
         // Si la lista está vacía, el nuevo proceso se convierte en el primero
         listaListos = nuevo;
     } else {
@@ -76,7 +76,7 @@ void crearProceso() {
         Proceso* actual = listaListos;
         
         // Se recorre la lista hasta llegar al último nodo
-        while (actual->siguiente != nullptr) {
+        while (actual->siguiente != NULL) {
             actual = actual->siguiente;
         }
         
