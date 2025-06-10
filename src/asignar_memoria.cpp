@@ -55,7 +55,7 @@ void asignarMemoria() {
     cin >> nuevo->idProceso;
 
     // Pedir el tamaño del bloque de memoria
-    cout << "Ingrese el tamaño del bloque de memoria: ";
+    cout << "Ingrese el tamano del bloque de memoria: ";
     cin >> nuevo->tamanio;
 
     // Insertar el nuevo bloque al inicio de la pila
