@@ -59,7 +59,7 @@ void cambiarEstado() {
 	}
 	
 	// Verificamos que el proceso no haya sido encontrado
-	if (actual = NULL) {
+	if (actual == NULL) {
 		cout << "Proceso no encontrado.\n";
 		return;
 	}
@@ -78,7 +78,7 @@ void cambiarEstado() {
 	
 	// Se pregunta al usuario que estado desea mover el proceso
 	int opcion;
-	cout << "Seleccioneel nuevo estado del proceso:\n";
+	cout << "Seleccione el nuevo estado del proceso:\n";
 	cout << "1. Mover a el CPU (cola de prioridad)\n";
 	cout << "2. Mover a bloqueados (espera por E/S)\n";
 	cout << "Opcion: ";
@@ -90,7 +90,7 @@ void cambiarEstado() {
 		if(colaCPU == NULL || actual->prioridad > colaCPU->prioridad) {
 			// Si la cola esta vacia o el proceso tiene mayor prioridad, va al inicio
 			actual->siguiente = colaCPU;
-			cola CPU = actual;		
+			colaCPU = actual;		
 		} else {
 			// Buscar la posicion correcta segun prioridad
 			Proceso* temp = colaCPU;
@@ -105,7 +105,35 @@ void cambiarEstado() {
 	
 		cout << "Proceso fue movido a la CPU.\n";
 	} else if (opcion == 2) {
+		// Se inserta el proceso en la cola de bloqueados
 		
+		ProcesoBloqueado* nuevoBloqueado = new ProcesoBloqueado();
+		
+		// Se copia los datos del proceso de la estructura de bloqueados
+		nuevoBloqueado->id = actual->id;
+		strcpy(nuevoBloqueado->nombre, actual->nombre);
+		nuevoBloqueado->tiempoEspera = 3; // Por defecto
+		nuevoBloqueado->siguiente = NULL;
+		
+		// Insertar al final de la cola de bloqueados
+		if (colaBloqueados == NULL) {
+			colaBloqueados = nuevoBloqueado;
+		} else {
+			ProcesoBloqueado* temp = colaBloqueados;
+			while (temp->siguiente != NULL) {
+				temp = temp->siguiente;
+			}
+			temp->siguiente = nuevoBloqueado;
+		}
+		
+		// Liberar memoria del proceso original
+		delete actual;
+		
+		cout << "Proceso movido a bloqueados.\n";
+				
+	} else {
+		cout << "Opcion invalida. El proceso ha sido eliminado por seguridad.\n";
+		delete actual;
 	}
 	
 }
