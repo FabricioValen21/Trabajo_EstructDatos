@@ -11,8 +11,8 @@ Este proyecto consiste en la simulación de un sistema de gestión de procesos u
 
 ## Instrucciones de uso
 1. Abrir el proyecto en Dev-C++ u otro entorno compatible.
-2. Compilar el archivo `main.cpp`.
-3. Ejecutar el programa desde el entorno o consola.
+2. Abri la carpeta 'src/CODIGO COMPLETO'
+3. Ejecutar el archivo `gestion de procesos.exe`.
 4. Seguir las opciones del menú para interactuar con el sistema.
 
 ## Requisitos
