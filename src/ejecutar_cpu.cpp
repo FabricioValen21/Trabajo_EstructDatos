@@ -16,12 +16,12 @@ void ejecutarProceso() {
     proceso->duracion--;
 
     cout << "Ejecutando proceso: " << proceso->nombre 
-         << " (ID: " << proceso->id << "), Duración restante: " << proceso->duracion << endl;
+         << " (ID: " << proceso->id << "), Duración restante: " << proceso
+        liberarMemoria(proceso->id);
+        delete proceso;->duracion << endl;
 
     if (proceso->duracion <= 0) {
         cout << "Proceso finalizado.\n";
-        liberarMemoria(proceso->id);
-        delete proceso;
     } else {
         encolar(proceso);
     }
