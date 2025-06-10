@@ -60,7 +60,7 @@ void ejecutarProceso() {
 
     // Mostrar información del proceso en ejecución
     cout << "Ejecutando proceso: " << proceso->nombre << endl;
-    cout << "ID: " << proceso->id << ", Duración restante: " << proceso->duracion << endl;
+    cout << "ID: " << proceso->id << ", Duracion restante: " << proceso->duracion << endl;
 
     // Verificar si el proceso terminó
     if (proceso->duracion <= 0) {
