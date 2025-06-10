@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 // ==== ESTRUCTURAS DEL SISTEMA ====
@@ -111,7 +112,7 @@ void cambiarEstado() {
 		
 		// Se copia los datos del proceso de la estructura de bloqueados
 		nuevoBloqueado->id = actual->id;
-		strcpy(nuevoBloqueado->nombre, actual->nombre);
+		strcpy (nuevoBloqueado->nombre, actual->nombre);
 		nuevoBloqueado->tiempoEspera = 3; // Por defecto
 		nuevoBloqueado->siguiente = NULL;
 		

@@ -1,63 +1,31 @@
 #include <iostream>
 using namespace std;
 
-// ==== ESTRUCTURAS DEL SISTEMA ====
-// NO ELIMINAR NI MODIFICAR NADA DE ESTO
-// TODOS LOS .CPP DEBEN USAR ESTAS MISMAS ESTRUCTURAS
+// CASO:
+// El CPU quiere ejecutar el proceso con mayor prioridad.
+// Este archivo desencola un proceso, reduce su duraciÃƒÂ³n y decide si terminÃƒÂ³ o vuelve a la cola.
 
-struct Proceso {
-    int id;                 // Identificador del proceso
-    char nombre[30];        // Nombre del proceso
-    int prioridad;          // 0: baja, 1: media, 2: alta
-    int duracion;           // Tiempo de ejecución restante
-    Proceso* siguiente;     // Puntero al siguiente nodo
-};
+void ejecutarProceso() {
+   void ejecutarProceso() {
+    if (colaCPU == nullptr) {
+        cout << "No hay procesos para ejecutar\n";
+        return;
+    }
 
-struct BloqueMemoria {
-    int idProceso;              // ID del proceso al que pertenece el bloque
-    int tamanio;                // Tamaño de memoria asignado
-    BloqueMemoria* siguiente;   // Siguiente bloque en la pila
-};
+    ProcesoCPU* proceso = desencolar();
+    proceso->duracion--;
 
-struct ProcesoBloqueado {
-    int id;                     // ID del proceso bloqueado
-    char nombre[30];            // Nombre del proceso
-    int tiempoEspera;           // Tiempo estimado de espera por E/S
-    ProcesoBloqueado* siguiente;// Siguiente en la cola de bloqueados
-};
+    cout << "Ejecutando proceso: " << proceso->nombre 
+         << " (ID: " << proceso->id << "), DuraciÃ³n restante: " << proceso
+        liberarMemoria(proceso->id);
+        delete proceso;->duracion << endl;
 
-// ==== FIN DE ESTRUCTURAS DEL SISTEMA ====
+    if (proceso->duracion <= 0) {
+        cout << "Proceso finalizado.\n";
+    } else {
+        encolar(proceso);
+    }
+}
 
-// ==== VARIABLES GLOBALES COMPARTIDAS ====
-// NO ELIMINAR NI CAMBIAR NOMBRES NI TIPOS
-
-extern Proceso* listaListos;
-extern Proceso* colaCPU;
-extern BloqueMemoria* pilaMemoria;
-extern ProcesoBloqueado* colaBloqueados;
-
-// ==== FIN DE VARIABLES ====
-
-// asignar_memoria.cpp
-// Implementa la funcionalidad del menú: "5. Asignar memoria a un proceso"
-// Esta funcion simula la asignacion de memoria usando una pila (LIFO), agregando un bloque con ID de proceso y tamaño.
-
-void asignarMemoria() {
-    // Se crea un nuevo nodo de tipo BloqueMemoria
-    BloqueMemoria* nuevo = new BloqueMemoria();
-
-    // Pedir al usuario el ID del proceso
-    cout << "Ingrese el ID del proceso que usara el bloque de memoria: ";
-    cin >> nuevo->idProceso;
-
-    // Pedir el tamaño del bloque de memoria
-    cout << "Ingrese el tamanio del bloque de memoria: ";
-    cin >> nuevo->tamanio;
-
-    // Insertar el nuevo bloque al inicio de la pila
-    nuevo->siguiente = pilaMemoria; // Aquí el nuevo bloque apunta a lo que estaba en la cima
-    pilaMemoria = nuevo;            // Ahora el nuevo bloque ES la nueva cima de la pila
-
-    cout << "Memoria asignada correctamente al proceso.\n";
 }
 

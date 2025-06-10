@@ -39,7 +39,7 @@ ProcesoBloqueado* colaBloqueados = NULL; // Cola de procesos bloqueados
 // ==== FIN DE VARIABLES GLOBALES ====
 
 
-// Prototipos de funciones (declaración externa)
+// Prototipos de funciones (declaracion externa)
 void crearProceso();
 void verProcesosListo();
 void cambiarEstado();

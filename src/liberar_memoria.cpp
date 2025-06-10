@@ -38,17 +38,18 @@ extern ProcesoBloqueado* colaBloqueados;
 
 // ==== FIN DE VARIABLES ====
 
-// CASO:
-// Cuando un proceso termina, libera su memoria.
-// Este archivo quita el bloque mÃ¡s reciente de la pila (pop).
+// liberar_memoria.cpp
+// Implementa la funcionalidad del menú: "6. Liberar memoria"
+// Esta función elimina el bloque más reciente de la pila de memoria (simula un pop).
 
 void liberarMemoria() {
-    if (pilaMemoria == NULL){
-        cout << "No hay bloques para liberar" << endl;  } 
-	else {
+    if (pilaMemoria == NULL) {
+        cout << "No hay bloques para liberar." << endl;
+    } else {
         BloqueMemoria* temp = pilaMemoria;
         pilaMemoria = pilaMemoria->siguiente;
         delete temp;
-        cout << "Bloque de memoria liberado correctamente." << endl;
-    }
+        cout << "Bloque de memoria liberado correctamente." << endl;
+    }
 }
+
