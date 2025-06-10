@@ -51,7 +51,7 @@ void asignarMemoria() {
     BloqueMemoria* nuevo = new BloqueMemoria();
 
     // Pedir al usuario el ID del proceso
-    cout << "Ingrese el ID del proceso que usará el bloque de memoria: ";
+    cout << "Ingrese el ID del proceso que usara el bloque de memoria: ";
     cin >> nuevo->idProceso;
 
     // Pedir el tamaño del bloque de memoria
