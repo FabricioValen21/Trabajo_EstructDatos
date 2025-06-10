@@ -44,7 +44,7 @@ extern ProcesoBloqueado* colaBloqueados;
 // Este archivo muestra todos los procesos en la lista "Listo".
 
 void verProcesosListo() {
-    // Verificar si la lista está vacía
+    // Verificar si la lista esta vacia
     if (listaListos == NULL) {
         cout << "\nNo hay procesos en estado 'Listo'.\n";
         return;
@@ -93,7 +93,7 @@ void verProcesosListo() {
         }
         cout << "\t\t";
         
-        // Mostrar duración restante
+        // Mostrar duracion restante
         cout << temp->duracion << " seg" << endl;
         
         // Incrementar contador
