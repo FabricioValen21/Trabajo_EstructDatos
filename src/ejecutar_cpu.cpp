@@ -38,10 +38,26 @@ extern ProcesoBloqueado* colaBloqueados;
 
 // ==== FIN DE VARIABLES ====
 
-// CASO:
-// El CPU quiere ejecutar el proceso con mayor prioridad.
-// Este archivo desencola un proceso, reduce su duraciÃ³n y decide si terminÃ³ o vuelve a la cola.
+// asignar_memoria.cpp
+// Implementa la funcionalidad del menú: "5. Asignar memoria a un proceso"
+// Esta funcion simula la asignacion de memoria usando una pila (LIFO), agregando un bloque con ID de proceso y tamaño.
 
-void ejecutarProceso() {
-    // Desencolar, duraciÃ³n--, si llega a 0 liberar memoria, si no, reencolar.
+void asignarMemoria() {
+    // Se crea un nuevo nodo de tipo BloqueMemoria
+    BloqueMemoria* nuevo = new BloqueMemoria();
+
+    // Pedir al usuario el ID del proceso
+    cout << "Ingrese el ID del proceso que usara el bloque de memoria: ";
+    cin >> nuevo->idProceso;
+
+    // Pedir el tamaño del bloque de memoria
+    cout << "Ingrese el tamanio del bloque de memoria: ";
+    cin >> nuevo->tamanio;
+
+    // Insertar el nuevo bloque al inicio de la pila
+    nuevo->siguiente = pilaMemoria; // Aquí el nuevo bloque apunta a lo que estaba en la cima
+    pilaMemoria = nuevo;            // Ahora el nuevo bloque ES la nueva cima de la pila
+
+    cout << "Memoria asignada correctamente al proceso.\n";
 }
+
