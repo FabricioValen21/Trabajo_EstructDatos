@@ -42,6 +42,29 @@ extern ProcesoBloqueado* colaBloqueados;
 // Algunos procesos se bloquean esperando algo (como E/S).
 // Este archivo muestra todos los procesos en la cola de bloqueados.
 
+// Función para mostrar los procesos que están en la cola de bloqueados
 void verBloqueados() {
-    // Recorrer y mostrar la cola de procesos bloqueados.
+
+    // Verifica si la cola de procesos bloqueados está vacía
+    if (colaBloqueados == NULL) {
+        // Si no hay procesos bloqueados, muestra un mensaje y termina la función
+        cout << "No hay procesos actualmente.\n";
+        return;
+    }
+    // Declara un puntero auxiliar para recorrer la cola, iniciando desde el primer proceso
+    ProcesoBloqueado* actual = colaBloqueados;
+    cout << "\n------ PROCESOS BLOQUEADOS -----\n";
+    // Bucle para recorrer cada proceso en la cola
+    while (actual != NULL) {
+        // Muestra el ID del proceso actual
+        cout << "ID: " << actual->id << endl;
+        // Muestra el nombre del proceso actual
+        cout << "Nombre: " << actual->nombre << endl;
+        // Muestra el tiempo de espera en ciclos del proceso actual
+        cout << "Tiempo de espera(E/S): " << actual->tiempoEspera << " ciclos\n";
+        cout << "----------------------------\n";
+        // Avanza al siguiente nodo de la cola
+        actual = actual->siguiente;
+    }
 }
+
