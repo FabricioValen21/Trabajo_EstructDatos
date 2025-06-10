@@ -42,6 +42,25 @@ extern ProcesoBloqueado* colaBloqueados;
 // Cuando se crea un proceso, necesita memoria.
 // Este archivo agrega un bloque de memoria a la pila simulada (push).
 
+// asignar_memoria.cpp
+// Implementa la funcionalidad del menú: "5. Asignar memoria a un proceso"
+// Esta función simula la asignación de memoria usando una pila (LIFO), agregando un bloque con ID de proceso y tamaño.
+
 void asignarMemoria() {
-    // Crear nuevo nodo en la pila con idProceso y tamaÃ±o.
+    // Crear nuevo nodo de tipo BloqueMemoria
+    BloqueMemoria* nuevo = new BloqueMemoria();
+
+    // Pedir al usuario el ID del proceso
+    cout << "Ingrese el ID del proceso que usará el bloque de memoria: ";
+    cin >> nuevo->idProceso;
+
+    // Pedir el tamaño del bloque de memoria
+    cout << "Ingrese el tamaño del bloque de memoria: ";
+    cin >> nuevo->tamanio;
+
+    // Insertar el nuevo bloque al inicio de la pila
+    nuevo->siguiente = pilaMemoria; // Aquí el nuevo bloque apunta a lo que estaba en la cima
+    pilaMemoria = nuevo;            // Ahora el nuevo bloque ES la nueva cima de la pila
+
+    cout << "Memoria asignada correctamente al proceso.\n";
 }
