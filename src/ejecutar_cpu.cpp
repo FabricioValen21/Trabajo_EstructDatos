@@ -38,26 +38,48 @@ extern ProcesoBloqueado* colaBloqueados;
 
 // ==== FIN DE VARIABLES ====
 
-// asignar_memoria.cpp
-// Implementa la funcionalidad del menú: "5. Asignar memoria a un proceso"
-// Esta funcion simula la asignacion de memoria usando una pila (LIFO), agregando un bloque con ID de proceso y tamaño.
+// ejecutar_cpu.cpp
+// Implementa la funcionalidad del menú: "4. Ejecutar proceso (CPU)"
+// Esta función desencola el proceso con mayor prioridad, reduce su duración
+// y lo elimina si finalizó o lo reencola si aún le falta tiempo.
 
-void asignarMemoria() {
-    // Se crea un nuevo nodo de tipo BloqueMemoria
-    BloqueMemoria* nuevo = new BloqueMemoria();
+void ejecutarProceso() {
+    if (colaCPU == NULL) {
+        cout << "No hay procesos para ejecutar." << endl;
+        return;
+    }
 
-    // Pedir al usuario el ID del proceso
-    cout << "Ingrese el ID del proceso que usara el bloque de memoria: ";
-    cin >> nuevo->idProceso;
+    // Desencolar el proceso de mayor prioridad (inicio de la cola)
+    Proceso* proceso = colaCPU;
+    colaCPU = colaCPU->siguiente;
 
-    // Pedir el tamaño del bloque de memoria
-    cout << "Ingrese el tamanio del bloque de memoria: ";
-    cin >> nuevo->tamanio;
+    // Reducir duración
+    proceso->duracion--;
 
-    // Insertar el nuevo bloque al inicio de la pila
-    nuevo->siguiente = pilaMemoria; // Aquí el nuevo bloque apunta a lo que estaba en la cima
-    pilaMemoria = nuevo;            // Ahora el nuevo bloque ES la nueva cima de la pila
+    // Mostrar información del proceso en ejecución
+    cout << "Ejecutando proceso: " << proceso->nombre << endl;
+    cout << "ID: " << proceso->id << ", Duración restante: " << proceso->duracion << endl;
 
-    cout << "Memoria asignada correctamente al proceso.\n";
+    // Liberar memoria si terminó, o reencolar si aún le falta
+    if (proceso->duracion <= 0) {
+        liberarMemoria(); // Llama a la función de liberar memoria
+        delete proceso;   // Libera el nodo
+        cout << "Proceso finalizado." << endl;
+    } else {
+        // Reencolar el proceso al final de la cola de CPU
+        proceso->siguiente = NULL;
+
+        if (colaCPU == NULL) {
+            colaCPU = proceso;
+        } else {
+            ProcesoCPU* temp = colaCPU;
+            while (temp->siguiente != NULL) {
+                temp = temp->siguiente;
+            }
+            temp->siguiente = proceso;
+        }
+    }
 }
+
+
 
